@@ -86,6 +86,7 @@ class ReportSensor(VaillantEntity):
             self, hub, DOMAIN, report.id, report.name, device_class, False
         )
         self.report = report
+        self._report_id = report.id
 
     async def vaillant_update(self):
         """Update specific for vaillant."""
@@ -93,7 +94,7 @@ class ReportSensor(VaillantEntity):
 
     def _find_report(self):
         for report in self.hub.system.reports:
-            if self.report.id == report.id:
+            if self._report_id == report.id:
                 return report
         return None
 
